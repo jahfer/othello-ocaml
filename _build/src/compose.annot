@@ -1,0 +1,1146 @@
+"src/compose.ml" 10 116 120 "src/compose.ml" 10 116 124
+type(
+  edit_operation option ->
+  edit_operation option -> composition * composition * composition
+)
+ident(
+  def comp "src/compose.ml" 26 818 818 "src/compose.ml" 1 0 -1
+)
+"src/compose.ml" 10 116 125 "src/compose.ml" 10 116 126
+type(
+  edit_operation option
+)
+ident(
+  def x "src/compose.ml" 10 116 127 "src/compose.ml" 24 759 816
+)
+"src/compose.ml" 10 116 127 "src/compose.ml" 10 116 128
+type(
+  edit_operation option
+)
+ident(
+  def y "src/compose.ml" 11 131 133 "src/compose.ml" 24 759 816
+)
+"src/compose.ml" 11 131 137 "src/compose.ml" 11 131 139
+type(
+  edit_operation
+)
+ident(
+  def x' "src/compose.ml" 12 177 179 "src/compose.ml" 24 759 816
+)
+"src/compose.ml" 11 131 143 "src/compose.ml" 11 131 155
+type(
+  edit_operation option -> default:edit_operation -> edit_operation
+)
+ident(
+  ext_ref Core.Option.value
+)
+"src/compose.ml" 11 131 156 "src/compose.ml" 11 131 157
+type(
+  edit_operation option
+)
+ident(
+  int_ref x "src/compose.ml" 10 116 125 "src/compose.ml" 10 116 126
+)
+"src/compose.ml" 11 131 167 "src/compose.ml" 11 131 172
+type(
+  edit_operation
+)
+"src/compose.ml" 11 131 142 "src/compose.ml" 11 131 173
+call(
+  stack
+)
+type(
+  edit_operation
+)
+"src/compose.ml" 12 177 183 "src/compose.ml" 12 177 185
+type(
+  edit_operation
+)
+ident(
+  def y' "src/compose.ml" 13 223 225 "src/compose.ml" 24 759 816
+)
+"src/compose.ml" 12 177 189 "src/compose.ml" 12 177 201
+type(
+  edit_operation option -> default:edit_operation -> edit_operation
+)
+ident(
+  ext_ref Core.Option.value
+)
+"src/compose.ml" 12 177 202 "src/compose.ml" 12 177 203
+type(
+  edit_operation option
+)
+ident(
+  int_ref y "src/compose.ml" 10 116 127 "src/compose.ml" 10 116 128
+)
+"src/compose.ml" 12 177 213 "src/compose.ml" 12 177 218
+type(
+  edit_operation
+)
+"src/compose.ml" 12 177 188 "src/compose.ml" 12 177 219
+call(
+  stack
+)
+type(
+  edit_operation
+)
+"src/compose.ml" 13 223 231 "src/compose.ml" 13 223 233
+type(
+  edit_operation
+)
+ident(
+  int_ref x' "src/compose.ml" 11 131 137 "src/compose.ml" 11 131 139
+)
+"src/compose.ml" 13 223 235 "src/compose.ml" 13 223 237
+type(
+  edit_operation
+)
+ident(
+  int_ref y' "src/compose.ml" 12 177 183 "src/compose.ml" 12 177 185
+)
+"src/compose.ml" 13 223 231 "src/compose.ml" 13 223 237
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 14 243 254 "src/compose.ml" 14 243 255
+ident(
+  def a "src/compose.ml" 15 271 275 "src/compose.ml" 17 388 421
+)
+"src/compose.ml" 14 243 253 "src/compose.ml" 14 243 256
+type(
+  int
+)
+"src/compose.ml" 14 243 247 "src/compose.ml" 14 243 256
+type(
+  edit_operation
+)
+"src/compose.ml" 14 243 265 "src/compose.ml" 14 243 266
+ident(
+  def b "src/compose.ml" 15 271 275 "src/compose.ml" 17 388 421
+)
+"src/compose.ml" 14 243 264 "src/compose.ml" 14 243 267
+type(
+  int
+)
+"src/compose.ml" 14 243 258 "src/compose.ml" 14 243 267
+type(
+  edit_operation
+)
+"src/compose.ml" 14 243 247 "src/compose.ml" 14 243 267
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 15 271 278 "src/compose.ml" 15 271 279
+type(
+  int
+)
+ident(
+  int_ref a "src/compose.ml" 14 243 253 "src/compose.ml" 14 243 256
+)
+"src/compose.ml" 15 271 280 "src/compose.ml" 15 271 281
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Core.( > )
+)
+"src/compose.ml" 15 271 282 "src/compose.ml" 15 271 283
+type(
+  int
+)
+ident(
+  int_ref b "src/compose.ml" 14 243 264 "src/compose.ml" 14 243 267
+)
+"src/compose.ml" 15 271 278 "src/compose.ml" 15 271 283
+type(
+  bool
+)
+"src/compose.ml" 15 271 302 "src/compose.ml" 15 271 303
+type(
+  int
+)
+ident(
+  int_ref a "src/compose.ml" 14 243 253 "src/compose.ml" 14 243 256
+)
+"src/compose.ml" 15 271 303 "src/compose.ml" 15 271 304
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Core.( - )
+)
+"src/compose.ml" 15 271 304 "src/compose.ml" 15 271 305
+type(
+  int
+)
+ident(
+  int_ref b "src/compose.ml" 14 243 264 "src/compose.ml" 14 243 267
+)
+"src/compose.ml" 15 271 301 "src/compose.ml" 15 271 306
+type(
+  int
+)
+"src/compose.ml" 15 271 294 "src/compose.ml" 15 271 307
+type(
+  edit_operation
+)
+"src/compose.ml" 15 271 290 "src/compose.ml" 15 271 307
+type(
+  composition
+)
+"src/compose.ml" 15 271 309 "src/compose.ml" 15 271 313
+type(
+  composition
+)
+"src/compose.ml" 15 271 321 "src/compose.ml" 15 271 325
+type(
+  edit_operation
+)
+ident(
+  int_ref y' "src/compose.ml" 12 177 183 "src/compose.ml" 12 177 185
+)
+"src/compose.ml" 15 271 315 "src/compose.ml" 15 271 325
+type(
+  composition
+)
+"src/compose.ml" 15 271 289 "src/compose.ml" 15 271 326
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 16 327 339 "src/compose.ml" 16 327 340
+type(
+  int
+)
+ident(
+  int_ref a "src/compose.ml" 14 243 253 "src/compose.ml" 14 243 256
+)
+"src/compose.ml" 16 327 341 "src/compose.ml" 16 327 342
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Core.( < )
+)
+"src/compose.ml" 16 327 343 "src/compose.ml" 16 327 344
+type(
+  int
+)
+ident(
+  int_ref b "src/compose.ml" 14 243 264 "src/compose.ml" 14 243 267
+)
+"src/compose.ml" 16 327 339 "src/compose.ml" 16 327 344
+type(
+  bool
+)
+"src/compose.ml" 16 327 351 "src/compose.ml" 16 327 355
+type(
+  composition
+)
+"src/compose.ml" 16 327 369 "src/compose.ml" 16 327 370
+type(
+  int
+)
+ident(
+  int_ref b "src/compose.ml" 14 243 264 "src/compose.ml" 14 243 267
+)
+"src/compose.ml" 16 327 370 "src/compose.ml" 16 327 371
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Core.( - )
+)
+"src/compose.ml" 16 327 371 "src/compose.ml" 16 327 372
+type(
+  int
+)
+ident(
+  int_ref a "src/compose.ml" 14 243 253 "src/compose.ml" 14 243 256
+)
+"src/compose.ml" 16 327 368 "src/compose.ml" 16 327 373
+type(
+  int
+)
+"src/compose.ml" 16 327 361 "src/compose.ml" 16 327 374
+type(
+  edit_operation
+)
+"src/compose.ml" 16 327 357 "src/compose.ml" 16 327 374
+type(
+  composition
+)
+"src/compose.ml" 16 327 382 "src/compose.ml" 16 327 386
+type(
+  edit_operation
+)
+ident(
+  int_ref x' "src/compose.ml" 11 131 137 "src/compose.ml" 11 131 139
+)
+"src/compose.ml" 16 327 376 "src/compose.ml" 16 327 386
+type(
+  composition
+)
+"src/compose.ml" 16 327 350 "src/compose.ml" 16 327 387
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 17 388 398 "src/compose.ml" 17 388 402
+type(
+  composition
+)
+"src/compose.ml" 17 388 404 "src/compose.ml" 17 388 408
+type(
+  composition
+)
+"src/compose.ml" 17 388 416 "src/compose.ml" 17 388 420
+type(
+  edit_operation
+)
+ident(
+  int_ref x' "src/compose.ml" 11 131 137 "src/compose.ml" 11 131 139
+)
+"src/compose.ml" 17 388 410 "src/compose.ml" 17 388 420
+type(
+  composition
+)
+"src/compose.ml" 17 388 397 "src/compose.ml" 17 388 421
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 16 327 336 "src/compose.ml" 17 388 421
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 15 271 275 "src/compose.ml" 17 388 421
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 18 422 426 "src/compose.ml" 18 422 432
+type(
+  edit_operation
+)
+"src/compose.ml" 18 422 437 "src/compose.ml" 18 422 438
+type(
+  edit_operation
+)
+"src/compose.ml" 18 422 426 "src/compose.ml" 18 422 438
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 18 422 451 "src/compose.ml" 18 422 455
+type(
+  composition
+)
+"src/compose.ml" 18 422 457 "src/compose.ml" 18 422 465
+type(
+  composition
+)
+"src/compose.ml" 18 422 473 "src/compose.ml" 18 422 477
+type(
+  edit_operation
+)
+ident(
+  int_ref x' "src/compose.ml" 11 131 137 "src/compose.ml" 11 131 139
+)
+"src/compose.ml" 18 422 467 "src/compose.ml" 18 422 477
+type(
+  composition
+)
+"src/compose.ml" 18 422 450 "src/compose.ml" 18 422 478
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 19 479 483 "src/compose.ml" 19 479 484
+type(
+  edit_operation
+)
+"src/compose.ml" 19 479 500 "src/compose.ml" 19 479 503
+type(
+  char
+)
+"src/compose.ml" 19 479 494 "src/compose.ml" 19 479 503
+type(
+  edit_operation
+)
+"src/compose.ml" 19 479 483 "src/compose.ml" 19 479 503
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 19 479 508 "src/compose.ml" 19 479 516
+type(
+  composition
+)
+"src/compose.ml" 19 479 518 "src/compose.ml" 19 479 522
+type(
+  composition
+)
+"src/compose.ml" 19 479 530 "src/compose.ml" 19 479 534
+type(
+  edit_operation
+)
+ident(
+  int_ref y' "src/compose.ml" 12 177 183 "src/compose.ml" 12 177 185
+)
+"src/compose.ml" 19 479 524 "src/compose.ml" 19 479 534
+type(
+  composition
+)
+"src/compose.ml" 19 479 507 "src/compose.ml" 19 479 535
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 20 536 546 "src/compose.ml" 20 536 549
+type(
+  char
+)
+"src/compose.ml" 20 536 540 "src/compose.ml" 20 536 549
+type(
+  edit_operation
+)
+"src/compose.ml" 20 536 557 "src/compose.ml" 20 536 560
+type(
+  int
+)
+"src/compose.ml" 20 536 551 "src/compose.ml" 20 536 560
+type(
+  edit_operation
+)
+"src/compose.ml" 20 536 540 "src/compose.ml" 20 536 560
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 20 536 565 "src/compose.ml" 20 536 569
+type(
+  composition
+)
+"src/compose.ml" 20 536 571 "src/compose.ml" 20 536 575
+type(
+  composition
+)
+"src/compose.ml" 20 536 583 "src/compose.ml" 20 536 587
+type(
+  edit_operation
+)
+ident(
+  int_ref x' "src/compose.ml" 11 131 137 "src/compose.ml" 11 131 139
+)
+"src/compose.ml" 20 536 577 "src/compose.ml" 20 536 587
+type(
+  composition
+)
+"src/compose.ml" 20 536 564 "src/compose.ml" 20 536 588
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 21 589 599 "src/compose.ml" 21 589 602
+type(
+  char
+)
+"src/compose.ml" 21 589 593 "src/compose.ml" 21 589 602
+type(
+  edit_operation
+)
+"src/compose.ml" 21 589 611 "src/compose.ml" 21 589 612
+ident(
+  def b "src/compose.ml" 21 589 617 "src/compose.ml" 21 589 654
+)
+"src/compose.ml" 21 589 610 "src/compose.ml" 21 589 613
+type(
+  int
+)
+"src/compose.ml" 21 589 604 "src/compose.ml" 21 589 613
+type(
+  edit_operation
+)
+"src/compose.ml" 21 589 593 "src/compose.ml" 21 589 613
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 21 589 618 "src/compose.ml" 21 589 622
+type(
+  composition
+)
+"src/compose.ml" 21 589 636 "src/compose.ml" 21 589 637
+type(
+  int
+)
+ident(
+  int_ref b "src/compose.ml" 21 589 610 "src/compose.ml" 21 589 613
+)
+"src/compose.ml" 21 589 637 "src/compose.ml" 21 589 638
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Core.( - )
+)
+"src/compose.ml" 21 589 638 "src/compose.ml" 21 589 639
+type(
+  int
+)
+"src/compose.ml" 21 589 635 "src/compose.ml" 21 589 640
+type(
+  int
+)
+"src/compose.ml" 21 589 628 "src/compose.ml" 21 589 641
+type(
+  edit_operation
+)
+"src/compose.ml" 21 589 624 "src/compose.ml" 21 589 641
+type(
+  composition
+)
+"src/compose.ml" 21 589 649 "src/compose.ml" 21 589 653
+type(
+  edit_operation
+)
+ident(
+  int_ref x' "src/compose.ml" 11 131 137 "src/compose.ml" 11 131 139
+)
+"src/compose.ml" 21 589 643 "src/compose.ml" 21 589 653
+type(
+  composition
+)
+"src/compose.ml" 21 589 617 "src/compose.ml" 21 589 654
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 22 655 665 "src/compose.ml" 22 655 668
+type(
+  char
+)
+"src/compose.ml" 22 655 659 "src/compose.ml" 22 655 668
+type(
+  edit_operation
+)
+"src/compose.ml" 22 655 670 "src/compose.ml" 22 655 676
+type(
+  edit_operation
+)
+"src/compose.ml" 22 655 659 "src/compose.ml" 22 655 676
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 22 655 684 "src/compose.ml" 22 655 688
+type(
+  composition
+)
+"src/compose.ml" 22 655 690 "src/compose.ml" 22 655 694
+type(
+  composition
+)
+"src/compose.ml" 22 655 696 "src/compose.ml" 22 655 704
+type(
+  composition
+)
+"src/compose.ml" 22 655 683 "src/compose.ml" 22 655 705
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 23 706 716 "src/compose.ml" 23 706 719
+type(
+  int
+)
+"src/compose.ml" 23 706 710 "src/compose.ml" 23 706 719
+type(
+  edit_operation
+)
+"src/compose.ml" 23 706 721 "src/compose.ml" 23 706 727
+type(
+  edit_operation
+)
+"src/compose.ml" 23 706 710 "src/compose.ml" 23 706 727
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 23 706 735 "src/compose.ml" 23 706 739
+type(
+  composition
+)
+"src/compose.ml" 23 706 741 "src/compose.ml" 23 706 745
+type(
+  composition
+)
+"src/compose.ml" 23 706 753 "src/compose.ml" 23 706 757
+type(
+  edit_operation
+)
+ident(
+  int_ref y' "src/compose.ml" 12 177 183 "src/compose.ml" 12 177 185
+)
+"src/compose.ml" 23 706 747 "src/compose.ml" 23 706 757
+type(
+  composition
+)
+"src/compose.ml" 23 706 734 "src/compose.ml" 23 706 758
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 24 759 763 "src/compose.ml" 24 759 764
+type(
+  edit_operation
+)
+"src/compose.ml" 24 759 766 "src/compose.ml" 24 759 767
+type(
+  edit_operation
+)
+"src/compose.ml" 24 759 763 "src/compose.ml" 24 759 767
+type(
+  edit_operation * edit_operation
+)
+"src/compose.ml" 24 759 787 "src/compose.ml" 24 759 792
+type(
+  exn -> composition * composition * composition
+)
+ident(
+  ext_ref Core.raise
+)
+"src/compose.ml" 24 759 802 "src/compose.ml" 24 759 815
+type(
+  string
+)
+"src/compose.ml" 24 759 793 "src/compose.ml" 24 759 816
+type(
+  exn
+)
+"src/compose.ml" 24 759 787 "src/compose.ml" 24 759 816
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 13 223 225 "src/compose.ml" 24 759 816
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 12 177 179 "src/compose.ml" 24 759 816
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 11 131 133 "src/compose.ml" 24 759 816
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 26 818 822 "src/compose.ml" 26 818 832
+type(
+  edit_operation list -> composition -> edit_operation list
+)
+ident(
+  def apply_comp "src/compose.ml" 33 987 987 "src/compose.ml" 1 0 -1
+)
+"src/compose.ml" 26 818 833 "src/compose.ml" 26 818 838
+type(
+  edit_operation list
+)
+ident(
+  def olist "src/compose.ml" 26 818 839 "src/compose.ml" 31 956 985
+)
+"src/compose.ml" 26 818 839 "src/compose.ml" 26 818 844
+type(
+  composition
+)
+ident(
+  def ocomp "src/compose.ml" 27 847 849 "src/compose.ml" 31 956 985
+)
+"src/compose.ml" 27 847 855 "src/compose.ml" 27 847 860
+type(
+  composition
+)
+ident(
+  int_ref ocomp "src/compose.ml" 26 818 839 "src/compose.ml" 26 818 844
+)
+"src/compose.ml" 28 866 870 "src/compose.ml" 28 866 878
+type(
+  composition
+)
+"src/compose.ml" 28 866 882 "src/compose.ml" 28 866 887
+type(
+  edit_operation list
+)
+ident(
+  int_ref olist "src/compose.ml" 26 818 833 "src/compose.ml" 26 818 838
+)
+"src/compose.ml" 29 888 899 "src/compose.ml" 29 888 900
+ident(
+  def a "src/compose.ml" 29 888 905 "src/compose.ml" 29 888 915
+)
+"src/compose.ml" 29 888 898 "src/compose.ml" 29 888 901
+type(
+  edit_operation
+)
+"src/compose.ml" 29 888 892 "src/compose.ml" 29 888 901
+type(
+  composition
+)
+"src/compose.ml" 29 888 905 "src/compose.ml" 29 888 906
+type(
+  edit_operation
+)
+ident(
+  int_ref a "src/compose.ml" 29 888 898 "src/compose.ml" 29 888 901
+)
+"src/compose.ml" 29 888 910 "src/compose.ml" 29 888 915
+type(
+  edit_operation list
+)
+ident(
+  int_ref olist "src/compose.ml" 26 818 833 "src/compose.ml" 26 818 838
+)
+"src/compose.ml" 29 888 905 "src/compose.ml" 29 888 915
+type(
+  edit_operation list
+)
+"src/compose.ml" 30 916 925 "src/compose.ml" 30 916 926
+ident(
+  def a "src/compose.ml" 30 916 931 "src/compose.ml" 30 916 955
+)
+"src/compose.ml" 30 916 924 "src/compose.ml" 30 916 927
+type(
+  edit_operation
+)
+"src/compose.ml" 30 916 920 "src/compose.ml" 30 916 927
+type(
+  composition
+)
+"src/compose.ml" 30 916 931 "src/compose.ml" 30 916 932
+type(
+  edit_operation
+)
+ident(
+  int_ref a "src/compose.ml" 30 916 924 "src/compose.ml" 30 916 927
+)
+"src/compose.ml" 30 916 937 "src/compose.ml" 30 916 948
+type(
+  edit_operation list -> edit_operation list
+)
+ident(
+  ext_ref Core.List.tl_exn
+)
+"src/compose.ml" 30 916 949 "src/compose.ml" 30 916 954
+type(
+  edit_operation list
+)
+ident(
+  int_ref olist "src/compose.ml" 26 818 833 "src/compose.ml" 26 818 838
+)
+"src/compose.ml" 30 916 936 "src/compose.ml" 30 916 955
+call(
+  stack
+)
+type(
+  edit_operation list
+)
+"src/compose.ml" 30 916 931 "src/compose.ml" 30 916 955
+type(
+  edit_operation list
+)
+"src/compose.ml" 31 956 960 "src/compose.ml" 31 956 964
+type(
+  composition
+)
+"src/compose.ml" 31 956 968 "src/compose.ml" 31 956 979
+type(
+  edit_operation list -> edit_operation list
+)
+ident(
+  ext_ref Core.List.tl_exn
+)
+"src/compose.ml" 31 956 980 "src/compose.ml" 31 956 985
+type(
+  edit_operation list
+)
+ident(
+  int_ref olist "src/compose.ml" 26 818 833 "src/compose.ml" 26 818 838
+)
+"src/compose.ml" 31 956 968 "src/compose.ml" 31 956 985
+call(
+  tail
+)
+type(
+  edit_operation list
+)
+"src/compose.ml" 27 847 849 "src/compose.ml" 31 956 985
+type(
+  edit_operation list
+)
+"src/compose.ml" 33 987 991 "src/compose.ml" 33 987 1009
+type(
+  edit_operation list -> edit_operation list -> edit_operation list
+)
+ident(
+  def compose_operations "src/compose.ml" 42 1291 1335 "src/compose.ml" 1 0 -1
+)
+"src/compose.ml" 33 987 1010 "src/compose.ml" 33 987 1015
+type(
+  edit_operation list
+)
+ident(
+  def lista "src/compose.ml" 33 987 1016 "src/compose.ml" 42 1291 1335
+)
+"src/compose.ml" 33 987 1016 "src/compose.ml" 33 987 1021
+type(
+  edit_operation list
+)
+ident(
+  def listb "src/compose.ml" 34 1024 1026 "src/compose.ml" 42 1291 1335
+)
+"src/compose.ml" 34 1024 1034 "src/compose.ml" 34 1024 1046
+type(
+  edit_operation list ->
+  edit_operation list -> edit_operation list -> edit_operation list
+)
+ident(
+  def compose_list "src/compose.ml" 34 1024 1026 "src/compose.ml" 42 1291 1335
+)
+"src/compose.ml" 34 1024 1047 "src/compose.ml" 34 1024 1048
+type(
+  edit_operation list
+)
+ident(
+  def a "src/compose.ml" 34 1024 1049 "src/compose.ml" 41 1216 1290
+)
+"src/compose.ml" 34 1024 1049 "src/compose.ml" 34 1024 1050
+type(
+  edit_operation list
+)
+ident(
+  def b "src/compose.ml" 34 1024 1051 "src/compose.ml" 41 1216 1290
+)
+"src/compose.ml" 34 1024 1051 "src/compose.ml" 34 1024 1054
+type(
+  edit_operation list
+)
+ident(
+  def acc "src/compose.ml" 35 1057 1061 "src/compose.ml" 41 1216 1290
+)
+"src/compose.ml" 35 1057 1067 "src/compose.ml" 35 1057 1068
+type(
+  edit_operation list
+)
+ident(
+  int_ref a "src/compose.ml" 34 1024 1047 "src/compose.ml" 34 1024 1048
+)
+"src/compose.ml" 35 1057 1070 "src/compose.ml" 35 1057 1071
+type(
+  edit_operation list
+)
+ident(
+  int_ref b "src/compose.ml" 34 1024 1049 "src/compose.ml" 34 1024 1050
+)
+"src/compose.ml" 35 1057 1067 "src/compose.ml" 35 1057 1071
+type(
+  edit_operation list * edit_operation list
+)
+"src/compose.ml" 36 1077 1083 "src/compose.ml" 36 1077 1085
+type(
+  edit_operation list
+)
+"src/compose.ml" 36 1077 1087 "src/compose.ml" 36 1077 1089
+type(
+  edit_operation list
+)
+"src/compose.ml" 36 1077 1083 "src/compose.ml" 36 1077 1089
+type(
+  edit_operation list * edit_operation list
+)
+"src/compose.ml" 36 1077 1093 "src/compose.ml" 36 1077 1096
+type(
+  edit_operation list
+)
+ident(
+  int_ref acc "src/compose.ml" 34 1024 1051 "src/compose.ml" 34 1024 1054
+)
+"src/compose.ml" 37 1097 1103 "src/compose.ml" 37 1097 1104
+type(
+  edit_operation list
+)
+"src/compose.ml" 37 1097 1106 "src/compose.ml" 37 1097 1107
+type(
+  edit_operation list
+)
+"src/compose.ml" 37 1097 1103 "src/compose.ml" 37 1097 1107
+type(
+  edit_operation list * edit_operation list
+)
+"src/compose.ml" 38 1111 1121 "src/compose.ml" 38 1111 1125
+type(
+  edit_operation option
+)
+ident(
+  def a_hd "src/compose.ml" 39 1142 1148 "src/compose.ml" 41 1216 1290
+)
+"src/compose.ml" 38 1111 1128 "src/compose.ml" 38 1111 1135
+type(
+  edit_operation list -> edit_operation option
+)
+ident(
+  ext_ref Core.List.hd
+)
+"src/compose.ml" 38 1111 1135 "src/compose.ml" 38 1111 1138
+type(
+  edit_operation list
+)
+ident(
+  int_ref a "src/compose.ml" 34 1024 1047 "src/compose.ml" 34 1024 1048
+)
+"src/compose.ml" 38 1111 1128 "src/compose.ml" 38 1111 1138
+call(
+  stack
+)
+type(
+  edit_operation option
+)
+"src/compose.ml" 39 1142 1152 "src/compose.ml" 39 1142 1156
+type(
+  edit_operation option
+)
+ident(
+  def b_hd "src/compose.ml" 40 1173 1179 "src/compose.ml" 41 1216 1290
+)
+"src/compose.ml" 39 1142 1159 "src/compose.ml" 39 1142 1166
+type(
+  edit_operation list -> edit_operation option
+)
+ident(
+  ext_ref Core.List.hd
+)
+"src/compose.ml" 39 1142 1166 "src/compose.ml" 39 1142 1169
+type(
+  edit_operation list
+)
+ident(
+  int_ref b "src/compose.ml" 34 1024 1049 "src/compose.ml" 34 1024 1050
+)
+"src/compose.ml" 39 1142 1159 "src/compose.ml" 39 1142 1169
+call(
+  stack
+)
+type(
+  edit_operation option
+)
+"src/compose.ml" 40 1173 1184 "src/compose.ml" 40 1173 1186
+type(
+  composition
+)
+ident(
+  def c1 "src/compose.ml" 41 1216 1222 "src/compose.ml" 41 1216 1290
+)
+"src/compose.ml" 40 1173 1188 "src/compose.ml" 40 1173 1190
+type(
+  composition
+)
+ident(
+  def c2 "src/compose.ml" 41 1216 1222 "src/compose.ml" 41 1216 1290
+)
+"src/compose.ml" 40 1173 1192 "src/compose.ml" 40 1173 1194
+type(
+  composition
+)
+ident(
+  def c3 "src/compose.ml" 41 1216 1222 "src/compose.ml" 41 1216 1290
+)
+"src/compose.ml" 40 1173 1183 "src/compose.ml" 40 1173 1195
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 40 1173 1198 "src/compose.ml" 40 1173 1202
+type(
+  edit_operation option ->
+  edit_operation option -> composition * composition * composition
+)
+ident(
+  int_ref comp "src/compose.ml" 10 116 120 "src/compose.ml" 10 116 124
+)
+"src/compose.ml" 40 1173 1203 "src/compose.ml" 40 1173 1207
+type(
+  edit_operation option
+)
+ident(
+  int_ref a_hd "src/compose.ml" 38 1111 1121 "src/compose.ml" 38 1111 1125
+)
+"src/compose.ml" 40 1173 1208 "src/compose.ml" 40 1173 1212
+type(
+  edit_operation option
+)
+ident(
+  int_ref b_hd "src/compose.ml" 39 1142 1152 "src/compose.ml" 39 1142 1156
+)
+"src/compose.ml" 40 1173 1198 "src/compose.ml" 40 1173 1212
+call(
+  stack
+)
+type(
+  composition * composition * composition
+)
+"src/compose.ml" 41 1216 1222 "src/compose.ml" 41 1216 1234
+type(
+  edit_operation list ->
+  edit_operation list -> edit_operation list -> edit_operation list
+)
+ident(
+  int_ref compose_list "src/compose.ml" 34 1024 1034 "src/compose.ml" 34 1024 1046
+)
+"src/compose.ml" 41 1216 1236 "src/compose.ml" 41 1216 1246
+type(
+  edit_operation list -> composition -> edit_operation list
+)
+ident(
+  int_ref apply_comp "src/compose.ml" 26 818 822 "src/compose.ml" 26 818 832
+)
+"src/compose.ml" 41 1216 1247 "src/compose.ml" 41 1216 1248
+type(
+  edit_operation list
+)
+ident(
+  int_ref a "src/compose.ml" 34 1024 1047 "src/compose.ml" 34 1024 1048
+)
+"src/compose.ml" 41 1216 1249 "src/compose.ml" 41 1216 1251
+type(
+  composition
+)
+ident(
+  int_ref c1 "src/compose.ml" 40 1173 1184 "src/compose.ml" 40 1173 1186
+)
+"src/compose.ml" 41 1216 1235 "src/compose.ml" 41 1216 1252
+call(
+  stack
+)
+type(
+  edit_operation list
+)
+"src/compose.ml" 41 1216 1254 "src/compose.ml" 41 1216 1264
+type(
+  edit_operation list -> composition -> edit_operation list
+)
+ident(
+  int_ref apply_comp "src/compose.ml" 26 818 822 "src/compose.ml" 26 818 832
+)
+"src/compose.ml" 41 1216 1265 "src/compose.ml" 41 1216 1266
+type(
+  edit_operation list
+)
+ident(
+  int_ref b "src/compose.ml" 34 1024 1049 "src/compose.ml" 34 1024 1050
+)
+"src/compose.ml" 41 1216 1267 "src/compose.ml" 41 1216 1269
+type(
+  composition
+)
+ident(
+  int_ref c2 "src/compose.ml" 40 1173 1188 "src/compose.ml" 40 1173 1190
+)
+"src/compose.ml" 41 1216 1253 "src/compose.ml" 41 1216 1270
+call(
+  stack
+)
+type(
+  edit_operation list
+)
+"src/compose.ml" 41 1216 1272 "src/compose.ml" 41 1216 1282
+type(
+  edit_operation list -> composition -> edit_operation list
+)
+ident(
+  int_ref apply_comp "src/compose.ml" 26 818 822 "src/compose.ml" 26 818 832
+)
+"src/compose.ml" 41 1216 1283 "src/compose.ml" 41 1216 1286
+type(
+  edit_operation list
+)
+ident(
+  int_ref acc "src/compose.ml" 34 1024 1051 "src/compose.ml" 34 1024 1054
+)
+"src/compose.ml" 41 1216 1287 "src/compose.ml" 41 1216 1289
+type(
+  composition
+)
+ident(
+  int_ref c3 "src/compose.ml" 40 1173 1192 "src/compose.ml" 40 1173 1194
+)
+"src/compose.ml" 41 1216 1271 "src/compose.ml" 41 1216 1290
+call(
+  stack
+)
+type(
+  edit_operation list
+)
+"src/compose.ml" 41 1216 1222 "src/compose.ml" 41 1216 1290
+call(
+  tail
+)
+type(
+  edit_operation list
+)
+"src/compose.ml" 40 1173 1179 "src/compose.ml" 41 1216 1290
+type(
+  edit_operation list
+)
+"src/compose.ml" 39 1142 1148 "src/compose.ml" 41 1216 1290
+type(
+  edit_operation list
+)
+"src/compose.ml" 38 1111 1117 "src/compose.ml" 41 1216 1290
+type(
+  edit_operation list
+)
+"src/compose.ml" 35 1057 1061 "src/compose.ml" 41 1216 1290
+type(
+  edit_operation list
+)
+"src/compose.ml" 42 1291 1296 "src/compose.ml" 42 1291 1304
+type(
+  edit_operation list -> edit_operation list
+)
+ident(
+  ext_ref Core.List.rev
+)
+"src/compose.ml" 42 1291 1305 "src/compose.ml" 42 1291 1307
+type(
+  (edit_operation list -> edit_operation list) ->
+  edit_operation list -> edit_operation list
+)
+ident(
+  ext_ref Core.( @@ )
+)
+"src/compose.ml" 42 1291 1308 "src/compose.ml" 42 1291 1320
+type(
+  edit_operation list ->
+  edit_operation list -> edit_operation list -> edit_operation list
+)
+ident(
+  int_ref compose_list "src/compose.ml" 34 1024 1034 "src/compose.ml" 34 1024 1046
+)
+"src/compose.ml" 42 1291 1321 "src/compose.ml" 42 1291 1326
+type(
+  edit_operation list
+)
+ident(
+  int_ref lista "src/compose.ml" 33 987 1010 "src/compose.ml" 33 987 1015
+)
+"src/compose.ml" 42 1291 1327 "src/compose.ml" 42 1291 1332
+type(
+  edit_operation list
+)
+ident(
+  int_ref listb "src/compose.ml" 33 987 1016 "src/compose.ml" 33 987 1021
+)
+"src/compose.ml" 42 1291 1333 "src/compose.ml" 42 1291 1335
+type(
+  edit_operation list
+)
+"src/compose.ml" 42 1291 1308 "src/compose.ml" 42 1291 1335
+call(
+  stack
+)
+type(
+  edit_operation list
+)
+"src/compose.ml" 42 1291 1296 "src/compose.ml" 42 1291 1335
+call(
+  tail
+)
+type(
+  edit_operation list
+)
+"src/compose.ml" 34 1024 1026 "src/compose.ml" 42 1291 1335
+type(
+  edit_operation list
+)

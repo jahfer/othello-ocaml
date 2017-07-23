@@ -1,0 +1,28 @@
+### Starting build.
+# Target: src/main.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/main.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/main.ml > src/main.ml.depends # cached
+# Target: src/compose.mli.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:mli, file:src/compose.mli, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/compose.mli > src/compose.mli.depends # cached
+# Target: src/operation.mli.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:mli, file:src/operation.mli, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/operation.mli > src/operation.mli.depends # cached
+# Target: src/operation.cmi, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:mli, file:src/operation.mli, interf, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/operation.cmi src/operation.mli # cached
+# Target: src/compose.cmi, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:mli, file:src/compose.mli, interf, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/compose.cmi src/compose.mli # cached
+# Target: src/main.cmo, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:cmo, extension:ml, file:src/main.cmo, file:src/main.ml, implem, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/main.cmo src/main.ml # cached
+# Target: src/main.d.cmo, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:cmo, extension:ml, file:src/main.d.cmo, file:src/main.ml, implem, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/main.d.cmo src/main.ml # cached
+# Target: src/compose.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/compose.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/compose.ml > src/compose.ml.depends # cached
+# Target: src/operation.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/operation.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/operation.ml > src/operation.ml.depends # cached
+# Target: src/compose.d.cmo, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:cmo, extension:ml, file:src/compose.d.cmo, file:src/compose.ml, implem, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/compose.d.cmo src/compose.ml
++ ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/compose.d.cmo src/compose.ml
+File "src/compose.ml", line 1:
+Error: The implementation src/compose.ml
+       does not match the interface src/compose.cmi:
+       The type `composition' is required but not provided
+Command exited with code 2.
+# Compilation unsuccessful.
