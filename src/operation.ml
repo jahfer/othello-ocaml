@@ -33,14 +33,4 @@ module List = struct
     | Append(x) -> x :: l
     | Swap(x) -> x :: (List.tl_exn l)
     | Tail -> List.tl_exn l
-
-  (* let cross x y f =
-    let rec cross_rec a b acc =
-      match a, b with
-      | [], [] -> acc
-      | _ ->
-        let a_hd, b_hd = (List.hd a, List.hd b) in
-        let c1, c2, c3 = f a_hd b_hd in
-        cross_rec (apply a c1) (apply b c2) (apply acc c3)
-    in List.rev @@ cross_rec x y [] *)
 end

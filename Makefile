@@ -1,9 +1,14 @@
-build:
-	corebuild src/main.d.byte
 clean:
 	corebuild -clean
+
+build:
+	corebuild src/main.byte
 run:
-	./main.d.byte
+	./main.byte
+
+build-test:
+	corebuild -pkg oUnit -Is src test/main.byte
 test:
-	corebuild test/compose_test.d.byte && ./compose_test.d.byte
-.PHONY: build clean
+	make build-test && ./main.byte
+
+.PHONY: build run clean test build-test

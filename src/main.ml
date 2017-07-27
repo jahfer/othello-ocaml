@@ -15,9 +15,9 @@ let print_oplist l =
   let () = print_oplist xf1 in
   print_oplist xf2
 
- (* let () =
+  let () =
   let ops1 = [Operation.Insert('a'); Operation.Retain(1)] in
   let ops2 = [Operation.Retain(2); Operation.Insert('b')] in
   let composed = Compose.compose_operations ops1 ops2 in
   let strings = List.map ~f:Operation.to_string composed in
-  print_list strings *)
+  print_list strings

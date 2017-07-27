@@ -16,18 +16,13 @@ let compose x y =
   | Insert(_), Delete    -> (List.Tail, List.Tail, List.Identity)
   | Retain(_), Delete    -> (List.Tail, List.Tail, List.Append(y'))
   | _, _                 -> raise (Failure "Unreachable")
-(*
-let compose_operations x y =
-  Operation.List.cross x y compose *)
 
  let compose_operations lista listb =
-  if (List.map ~f:Operation.size lista) = (List.map ~f:Operation.size listb) then
-    let rec compose_list a b acc =
-      match a, b with
-      | [], [] -> acc
-      | _ ->
-        let a_hd, b_hd = (List.hd a, List.hd b) in
-        let c1, c2, c3 = comp a_hd b_hd in
-        compose_list (Operation.List.apply a c1) (Operation.List.apply b c2) (Operation.List.apply acc c3)
-    in List.rev @@ compose_list lista listb []
-  else raise (Failure "Operation lists must be of same length")
+  let rec compose_list a b acc =
+    match a, b with
+    | [], [] -> acc
+    | _ ->
+      let a_hd, b_hd = (List.hd a, List.hd b) in
+      let c1, c2, c3 = compose a_hd b_hd in
+      compose_list (Operation.List.apply a c1) (Operation.List.apply b c2) (Operation.List.apply acc c3)
+  in List.rev @@ compose_list lista listb []
