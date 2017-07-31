@@ -1,5 +1,7 @@
 open Core
 
+type t = Operation.edit_operation list
+
 let compose x y =
   let x' = (Option.value x ~default:Operation.Empty) in
   let y' = (Option.value y ~default:Operation.Empty) in

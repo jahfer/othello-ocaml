@@ -7,8 +7,8 @@ run:
 	./main.byte
 
 build-test:
-	corebuild -pkg oUnit -Is src test/main.byte
+	corebuild -pkg oUnit -Is src test/test.byte
 test:
-	make build-test && ./main.byte
+	make build-test && ./test.byte
 
 .PHONY: build run clean test build-test

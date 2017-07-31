@@ -1,5 +1,7 @@
 open Core
 
+type t = Operation.edit_operation list
+
 let compress l =
   let rec compress_list lst acc =
     let open Operation in

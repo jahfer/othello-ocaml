@@ -1,3 +1,3 @@
-open Operation
+type t = Operation.edit_operation list
 
-val compose_operations: edit_operation list -> edit_operation list -> edit_operation list
+val compose_operations: t -> t -> t

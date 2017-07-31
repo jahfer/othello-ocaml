@@ -4,7 +4,6 @@ val size: edit_operation -> int
 
 module List : sig
   type t = edit_operation
-  type application = Identity | Tail | Append of edit_operation | Swap of edit_operation
+  type application = Identity | Tail | Append of t | Swap of t
   val apply: t list -> application -> t list
-  (* val cross: t list -> t list -> (t option -> t option -> application * application * application) -> t list *)
 end
