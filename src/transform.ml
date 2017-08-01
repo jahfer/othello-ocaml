@@ -1,5 +1,5 @@
 open Core
-
+module OList = Operation.List
 type t = Operation.edit_operation list
 
 let compress l =
@@ -16,27 +16,30 @@ let xform x y =
   let y' = (Option.value y ~default:Operation.Empty) in
   let open Operation in
   match x', y' with
-  | Insert(_), _         -> (List.Tail, List.Identity, List.Append(x'), List.Append(Operation.Retain(1)))
-  | _, Insert(_)         -> (List.Identity, List.Tail, List.Append(Operation.Retain(1)), List.Append(y'))
+  | Insert(_), _         -> OList.(Tail, Identity, Append(x'), Append(Retain(1)))
+  | _, Insert(_)         -> OList.(Identity, Tail, Append(Retain(1)), Append(y'))
   | Retain(a), Retain(b) ->
-    if a > b then (List.Swap(Retain(a-b)), List.Tail, List.Append(y'), List.Append(y'))
-    else if a < b then (List.Tail, List.Swap(Retain(b-a)), List.Append(x'), List.Append(x'))
-    else (List.Tail, List.Tail, List.Append(x'), List.Append(x'))
-  | Delete, Delete       -> (List.Tail, List.Tail, List.Identity, List.Identity)
-  | Delete, Retain(1)    -> (List.Tail, List.Tail, List.Append(x'), List.Identity)
-  | Delete, Retain(b)    -> (List.Tail, List.Swap(Retain(b-1)), List.Append(x'), List.Identity)
-  | Retain(1), Delete    -> (List.Tail, List.Tail, List.Identity, List.Append(y'))
-  | Retain(a), Delete    -> (List.Swap(Retain(a-1)), List.Tail, List.Identity, List.Append(y'))
+    if a > b then           OList.(Swap(Retain(a-b)), Tail, Append(y'), Append(y'))
+    else if a < b then      OList.(Tail, Swap(Retain(b-a)), Append(x'), Append(x'))
+    else                    OList.(Tail, Tail, Append(x'), Append(x'))
+  | Delete, Delete       -> OList.(Tail, Tail, Identity, Identity)
+  | Delete, Retain(1)    -> OList.(Tail, Tail, Append(x'), Identity)
+  | Delete, Retain(b)    -> OList.(Tail, Swap(Retain(b-1)), Append(x'), Identity)
+  | Retain(1), Delete    -> OList.(Tail, Tail, Identity, Append(y'))
+  | Retain(a), Delete    -> OList.(Swap(Retain(a-1)), Tail, Identity, Append(y'))
   | _, _                 -> raise (Failure "Unreachable")
 
  let transform_operations x y =
+  let base_accumulator = ([], []) in
   let rec transform_list a b (lhs, rhs) =
     match a, b with
-    | [], [] -> (List.rev lhs, List.rev rhs)
+    | [], [] -> compress (List.rev lhs), compress (List.rev rhs)
     | _ ->
       let a_hd, b_hd = (List.hd a, List.hd b) in
       let x1, x2, x3, x4 = xform a_hd b_hd in
-      transform_list (Operation.List.apply a x1) (Operation.List.apply b x2) ((Operation.List.apply lhs x3), (Operation.List.apply rhs x4))
+      transform_list
+        (Operation.List.apply a x1)
+        (Operation.List.apply b x2)
+        ((Operation.List.apply lhs x3), (Operation.List.apply rhs x4))
   in
-  let lhs, rhs = transform_list x y ([], []) in
-  (compress lhs), (compress rhs)
+  transform_list x y base_accumulator
