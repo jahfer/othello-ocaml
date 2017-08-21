@@ -9,20 +9,6 @@
       "type": "shell",
       "taskName": "clean",
       "problemMatcher": []
-    },
-    {
-      "taskName": "build",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": [
-        "$ocamlc"
-      ],
-      "presentation": {
-        "reveal": "silent",
-        "panel": "new"
-      }
     }
   ]
 }
