@@ -1,5 +1,4 @@
 open OUnit2
-module T = Transform
 module O = Operation
 
 let op_tom = [O.Retain(2); O.Insert('a')]
@@ -31,11 +30,6 @@ let test_transform_deletes_at_different_points _ =
   let lhs, rhs = O.TransformExecutor.reduce a b in
   assert_equal [O.Retain(1); O.Delete; O.Retain(1)] lhs;
   assert_equal [O.Retain(1); O.Delete; O.Retain(1)] rhs
-
- let test_compress _ =
-  let a = [O.Retain(2); O.Retain(1); O.Insert('a'); O.Retain(1); O.Retain(3)] in
-  let compressed = T.compress a in
-  assert_equal [O.Retain(3); O.Insert('a'); O.Retain(4)] compressed
 
 let suite = "Transform" >:::
   [

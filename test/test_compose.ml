@@ -1,6 +1,4 @@
 open OUnit2
-open Core_kernel
-
 module O = Operation
 
 let test_delete_any _ =
