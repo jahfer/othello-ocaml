@@ -7,28 +7,28 @@ let op_jerry = [O.Retain(2); O.Insert('t')]
 let op_barry = [O.Retain(1); O.Delete]
 
 let test_transform_two_operations _ =
-  let lhs, rhs = T.transform_operations op_tom op_jerry in
+  let lhs, rhs = O.TransformExecutor.reduce op_tom op_jerry in
   assert_equal [O.Retain(2); O.Insert('a'); O.Retain(1)] lhs;
   assert_equal [O.Retain(3); O.Insert('t')] rhs
 
 let test_delete_insert _ =
-  let lhs, rhs = T.transform_operations op_tom op_barry in
+  let lhs, rhs = O.TransformExecutor.reduce op_tom op_barry in
   assert_equal [O.Retain(1); O.Insert('a')] lhs;
   assert_equal [O.Retain(1); O.Delete; O.Retain(1)] rhs
 
 let test_insert_delete _ =
-  let lhs, rhs = T.transform_operations op_barry op_tom in
+  let lhs, rhs = O.TransformExecutor.reduce op_barry op_tom in
   assert_equal [O.Retain(1); O.Delete; O.Retain(1)] lhs;
   assert_equal [O.Retain(1); O.Insert('a')] rhs
 
 let test_transforming_two_delete_operations _ =
-  let lhs, rhs = T.transform_operations op_barry op_barry in
+  let lhs, rhs = O.TransformExecutor.reduce op_barry op_barry in
   assert_equal [O.Retain(1)] lhs;
   assert_equal [O.Retain(1)] rhs
 
 let test_transform_deletes_at_different_points _ =
   let a, b = [O.Retain(1); O.Delete; O.Retain(2)], [O.Retain(2); O.Delete; O.Retain(1)] in
-  let lhs, rhs = T.transform_operations a b in
+  let lhs, rhs = O.TransformExecutor.reduce a b in
   assert_equal [O.Retain(1); O.Delete; O.Retain(1)] lhs;
   assert_equal [O.Retain(1); O.Delete; O.Retain(1)] rhs
 

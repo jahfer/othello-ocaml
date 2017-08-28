@@ -1,45 +1,37 @@
 open OUnit2
-open Core
+open Core_kernel
 
-let rec print_list = function
-  | [] -> print_string "\n"
-  | hd::tl -> print_string hd ; print_string " " ; print_list tl
-
-let print_oplist l =
-  let strings = List.map ~f:Operation.to_string l in
-  print_list strings
-
-
+module O = Operation
 
 let test_delete_any _ =
-  let x, y = ([Operation.Delete], [Operation.Insert('a')]) in
-  let comp = Operation.ComposeExecutor.reduce x y in
-  assert_equal [Operation.Delete; Operation.Insert('a')] comp
+  let x, y = ([O.Delete], [O.Insert('a')]) in
+  let comp = O.ComposeExecutor.reduce x y in
+  assert_equal [O.Delete; O.Insert('a')] comp
 
 let test_any_insert _ =
-  let x, y = ([Operation.Retain(1)], [Operation.Insert('a'); Operation.Retain(1)]) in
-  let comp = Operation.ComposeExecutor.reduce x y in
-  assert_equal [Operation.Insert('a'); Operation.Retain(1)] comp
+  let x, y = ([O.Retain(1)], [O.Insert('a'); O.Retain(1)]) in
+  let comp = O.ComposeExecutor.reduce x y in
+  assert_equal [O.Insert('a'); O.Retain(1)] comp
 
 let test_retain_retain _ =
-  let x, y = ([Operation.Retain(1); Operation.Retain(1)], [Operation.Retain(2)]) in
-  let comp = Operation.ComposeExecutor.reduce x y in
-  assert_equal [Operation.Retain(1); Operation.Retain(1)] comp
+  let x, y = ([O.Retain(1); O.Retain(1)], [O.Retain(2)]) in
+  let comp = O.ComposeExecutor.reduce x y in
+  assert_equal [O.Retain(1); O.Retain(1)] comp
 
 let test_insert_retain _ =
-  let x, y = ([Operation.Insert('a'); Operation.Retain(1)], [Operation.Retain(2); Operation.Insert('b')]) in
-  let comp = Operation.ComposeExecutor.reduce x y in
-  assert_equal [Operation.Insert('a'); Operation.Retain(1); Operation.Insert('b')] comp
+  let x, y = ([O.Insert('a'); O.Retain(1)], [O.Retain(2); O.Insert('b')]) in
+  let comp = O.ComposeExecutor.reduce x y in
+  assert_equal [O.Insert('a'); O.Retain(1); O.Insert('b')] comp
 
 let test_insert_delete _ =
-  let x, y = ([Operation.Insert('a'); Operation.Retain(1)], [Operation.Delete; Operation.Retain(1)]) in
-  let comp = Operation.ComposeExecutor.reduce x y in
-  assert_equal [Operation.Retain(1)] comp
+  let x, y = ([O.Insert('a'); O.Retain(1)], [O.Delete; O.Retain(1)]) in
+  let comp = O.ComposeExecutor.reduce x y in
+  assert_equal [O.Retain(1)] comp
 
 let test_retain_delete _ =
-  let x, y = ([Operation.Retain(1)], [Operation.Delete]) in
-  let comp = Operation.ComposeExecutor.reduce x y in
-  assert_equal [Operation.Delete] comp
+  let x, y = ([O.Retain(1)], [O.Delete]) in
+  let comp = O.ComposeExecutor.reduce x y in
+  assert_equal [O.Delete] comp
 
 let suite = "Compose Tests" >:::
   [

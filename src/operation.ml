@@ -1,23 +1,12 @@
 open Core
 
-type edit_operation =
-  | Retain of int
-  | Insert of char
-  | Delete
-  | Empty
+type edit_operation = Retain of int | Insert of char | Delete | Empty
 
-let to_string operation =
-  match operation with
-  | Retain x -> sprintf "Retain(%d)" x
-  | Insert x -> sprintf "Insert(%c)" x
-  | Delete   -> sprintf "Delete"
-  | Empty    -> sprintf "Empty"
-
-type list_application =
+type 'a list_application =
   | Identity
   | Tail
-  | Append of edit_operation
-  | Swap of edit_operation
+  | Append of 'a
+  | Swap of 'a
 
 let apply l a =
   match a with
@@ -26,25 +15,26 @@ let apply l a =
   | Swap(x) -> x :: (List.tl_exn l)
   | Tail -> List.tl_exn l
 
-module type Executor_intf = sig
-  type t
-  type v
-  val reduce : t list -> t list -> v
-end
-
 module type Action = sig
   type t = edit_operation
-  type u = list_application
-  type v
-  type w
-  val initial : v
-  val instruct : t option -> t option -> u * u * w
-  val accumulate : v -> w -> v
-  val finalize : v -> v
+  type 'a u = 'a list_application
+  type _ v
+  type _ w
+  val initial : 'a v
+  val instruct : t option -> t option -> t u * t u * t w
+  val accumulate : 'a v -> 'a w -> 'a v
+  val finalize : t v -> t v
 end
 
-module Executor(M : Action) : (Executor_intf with type t = M.t and type v = M.v) = struct
-  include M
+module type Executor_intf = sig
+  type t
+  type _ v
+  val reduce : t list -> t list -> t v
+end
+
+module Executor(M : Action) : (Executor_intf with type t = M.t and type 'a v = 'a M.v) = struct
+  type t = M.t
+  type 'a v = 'a M.v
 
   let rec fold a b acc =
     match a, b with
@@ -56,11 +46,11 @@ module Executor(M : Action) : (Executor_intf with type t = M.t and type v = M.v)
   let reduce a b = fold a b M.initial
 end
 
-module Compose : (Action with type t = edit_operation and type v = edit_operation list) = struct
+module Compose : (Action with type 'a v = 'a list) = struct
   type t = edit_operation
-  type u = list_application
-  type v = edit_operation list
-  type w = u
+  type 'a u = 'a list_application
+  type 'a v = 'a list
+  type 'a w = 'a list_application
 
   let initial = []
   let finalize a = List.rev a
@@ -84,25 +74,39 @@ module Compose : (Action with type t = edit_operation and type v = edit_operatio
 end
 module ComposeExecutor = Executor(Compose)
 
-(* module Transform : Action = struct
+module Transform : (Action with type 'a v = 'a list * 'a list) = struct
   type t = edit_operation
-  type u = list_application
+  type 'a u = 'a list_application
+  type 'a v = 'a list * 'a list
+  type 'a w = 'a list_application * 'a list_application
+
+  let rev_compress l =
+    let rec compress_list lst acc =
+      match lst, acc with
+      | [], _ -> acc
+      | Retain(x) :: x_tl, Retain(y) :: y_tl -> compress_list x_tl (Retain(x + y) :: y_tl)
+      | x :: tl, _ -> compress_list tl (x :: acc)
+    in compress_list l []
+
+  let initial = ([], [])
+  let finalize (a, b) = rev_compress a, rev_compress b
+  let accumulate (a, b) (ia, ib) = (apply a ia), (apply b ib)
 
   let instruct x y =
     let x' = (Option.value x ~default:Empty) in
     let y' = (Option.value y ~default:Empty) in
     match x', y' with
-    | Insert(_), _         -> (Tail, Identity, Append(x'), Append(Retain(1)))
-    | _, Insert(_)         -> (Identity, Tail, Append(Retain(1)), Append(y'))
+    | Insert(_), _         -> (Tail, Identity, (Append(x'), Append(Retain(1))))
+    | _, Insert(_)         -> (Identity, Tail, (Append(Retain(1)), Append(y')))
     | Retain(a), Retain(b) ->
-      if a > b then           (Swap(Retain(a-b)), Tail, Append(y'), Append(y'))
-      else if a < b then      (Tail, Swap(Retain(b-a)), Append(x'), Append(x'))
-      else                    (Tail, Tail, Append(x'), Append(x'))
-    | Delete, Delete       -> (Tail, Tail, Identity, Identity)
-    | Delete, Retain(1)    -> (Tail, Tail, Append(x'), Identity)
-    | Delete, Retain(b)    -> (Tail, Swap(Retain(b-1)), Append(x'), Identity)
-    | Retain(1), Delete    -> (Tail, Tail, Identity, Append(y'))
-    | Retain(a), Delete    -> (Swap(Retain(a-1)), Tail, Identity, Append(y'))
+      if a > b then           (Swap(Retain(a-b)), Tail, (Append(y'), Append(y')))
+      else if a < b then      (Tail, Swap(Retain(b-a)), (Append(x'), Append(x')))
+      else                    (Tail, Tail, (Append(x'), Append(x')))
+    | Delete, Delete       -> (Tail, Tail, (Identity, Identity))
+    | Delete, Retain(1)    -> (Tail, Tail, (Append(x'), Identity))
+    | Delete, Retain(b)    -> (Tail, Swap(Retain(b-1)), (Append(x'), Identity))
+    | Retain(1), Delete    -> (Tail, Tail, (Identity, Append(y')))
+    | Retain(a), Delete    -> (Swap(Retain(a-1)), Tail, (Identity, Append(y')))
     | _, _                 -> raise (Failure "Unreachable")
 end
-module TransformExecutor = Executor(Transform) *)
+module TransformExecutor = Executor(Transform)

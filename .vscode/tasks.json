@@ -2,13 +2,26 @@
   // See https://go.microsoft.com/fwlink/?LinkId=733558
   // for the documentation about the tasks.json format
   "version": "2.0.0",
+<<<<<<< HEAD
       "command": "make",
+=======
+>>>>>>> a785ebf... WIP
   "tasks": [
     {
       "group": "build",
       "type": "shell",
+<<<<<<< HEAD
       "taskName": "clean",
       "problemMatcher": []
+=======
+      "command": "make test",
+      "taskName": "test",
+      "problemMatcher": ["$ocamlc"],
+      "presentation": {
+          "reveal": "always",
+          "panel": "new"
+      }
+>>>>>>> a785ebf... WIP
     }
   ]
 }
