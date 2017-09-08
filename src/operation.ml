@@ -1,64 +1,50 @@
 open Core
 
-type edit_operation = Retain of int | Insert of char | Delete | Empty
-
-type 'a list_application =
-  | Identity
-  | Tail
-  | Append of 'a
-  | Swap of 'a
-
-let apply l a =
-  match a with
-  | Identity -> l
-  | Append(x) -> x :: l
-  | Swap(x) -> x :: (List.tl_exn l)
-  | Tail -> List.tl_exn l
+type mutation = Retain of int | Insert of char | Delete | Empty
 
 module type Action = sig
-  type t = edit_operation
-  type 'a u = 'a list_application
-  type _ v
-  type _ w
-  val initial : 'a v
-  val instruct : t option -> t option -> t u * t u * t w
-  val accumulate : 'a v -> 'a w -> 'a v
-  val finalize : t v -> t v
+  type t
+  type _ u
+  val initial : 'a list u
+  val instruct : t option -> t option -> t List_iterator.instruction * t List_iterator.instruction * t List_iterator.instruction u
+  val accumulate : 'a list u -> 'a List_iterator.instruction u -> 'a list u
+  val finalize : t list u -> t list u
 end
 
 module type Executor_intf = sig
   type t
-  type _ v
-  val reduce : t list -> t list -> t v
+  type _ u
+  val reduce : t list -> t list -> t list u
 end
 
-module Executor(M : Action) : (Executor_intf with type t = M.t and type 'a v = 'a M.v) = struct
+module Executor(M : Action) : (Executor_intf with type t = M.t and type 'a u = 'a M.u) = struct
   type t = M.t
-  type 'a v = 'a M.v
+  type 'a u = 'a M.u
 
   let rec fold a b acc =
     match a, b with
     | [], [] -> M.finalize acc
     | _ ->
       let ia, ib, iacc = M.instruct (List.hd a) (List.hd b) in
-      fold (apply a ia) (apply b ib) (M.accumulate acc iacc)
+      fold (List_iterator.step a ia) (List_iterator.step b ib) (M.accumulate acc iacc)
 
   let reduce a b = fold a b M.initial
 end
 
-module Compose : (Action with type 'a v = 'a list) = struct
-  type t = edit_operation
-  type 'a u = 'a list_application
-  type 'a v = 'a list
-  type 'a w = 'a list_application
+module type OperationAction = Action with type t = mutation
+
+module Compose : (OperationAction with type 'a u = 'a) = struct
+  type t = mutation
+  type 'a u = 'a
 
   let initial = []
   let finalize a = List.rev a
-  let accumulate a ia = apply a ia
+  let accumulate a ia = List_iterator.step a ia
 
   let instruct x y =
     let x' = (Option.value x ~default:Empty) in
     let y' = (Option.value y ~default:Empty) in
+    let open List_iterator in
     match x', y' with
     | Retain(a), Retain(b) ->
       if a > b then           (Swap(Retain(a-b)), Tail, Append(y'))
@@ -74,11 +60,9 @@ module Compose : (Action with type 'a v = 'a list) = struct
 end
 module ComposeExecutor = Executor(Compose)
 
-module Transform : (Action with type 'a v = 'a list * 'a list) = struct
-  type t = edit_operation
-  type 'a u = 'a list_application
-  type 'a v = 'a list * 'a list
-  type 'a w = 'a list_application * 'a list_application
+module Transform : (OperationAction with type 'a u = 'a * 'a) = struct
+  type t = mutation
+  type 'a u = 'a * 'a
 
   let rev_compress l =
     let rec compress_list lst acc =
@@ -90,11 +74,12 @@ module Transform : (Action with type 'a v = 'a list * 'a list) = struct
 
   let initial = ([], [])
   let finalize (a, b) = rev_compress a, rev_compress b
-  let accumulate (a, b) (ia, ib) = (apply a ia), (apply b ib)
+  let accumulate (a, b) (ia, ib) = (List_iterator.step a ia), (List_iterator.step b ib)
 
   let instruct x y =
     let x' = (Option.value x ~default:Empty) in
     let y' = (Option.value y ~default:Empty) in
+    let open List_iterator in
     match x', y' with
     | Insert(_), _         -> (Tail, Identity, (Append(x'), Append(Retain(1))))
     | _, Insert(_)         -> (Identity, Tail, (Append(Retain(1)), Append(y')))
