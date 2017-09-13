@@ -2,44 +2,35 @@ open Core
 
 type mutation = Retain of int | Insert of char | Delete | Empty
 
-module type Action = sig
+module type Applicative = sig
   type t
   type _ u
-  val initial : 'a list u
-  val instruct : t option -> t option -> t List_iterator.instruction * t List_iterator.instruction * t List_iterator.instruction u
-  val accumulate : 'a list u -> 'a List_iterator.instruction u -> 'a list u
-  val finalize : t list u -> t list u
+  val instruct : t option -> t option ->
+    (t List_iterator.instruction * t List_iterator.instruction * t List_iterator.instruction u)
+  val fmap : ('a -> 'b) -> 'a u -> 'b u
+  val apply : ('a -> 'b) u -> 'a u -> 'b u
 end
 
-module type Executor_intf = sig
-  type t
-  type _ u
-  val reduce : t list -> t list -> t list u
-end
-
-module Executor(M : Action) : (Executor_intf with type t = M.t and type 'a u = 'a M.u) = struct
+module Reducer(M : Applicative) = struct
   type t = M.t
   type 'a u = 'a M.u
 
-  let rec fold a b acc =
-    match a, b with
-    | [], [] -> M.finalize acc
-    | _ ->
-      let ia, ib, iacc = M.instruct (List.hd a) (List.hd b) in
-      fold (List_iterator.step a ia) (List_iterator.step b ib) (M.accumulate acc iacc)
+  let (<*>) f x = M.apply f x
+  let (<$>) f x = M.fmap f x
 
-  let reduce a b = fold a b M.initial
+  let rec reduce a b acc =
+    match a, b with
+    | [], [] -> acc
+    | _ -> let ia, ib, iacc = M.instruct (List.hd a) (List.hd b) in
+      reduce (List_iterator.step a ia) (List_iterator.step b ib) (List_iterator.step <$> acc <*> iacc)
 end
 
-module type OperationAction = Action with type t = mutation
-
-module Compose : (OperationAction with type 'a u = 'a) = struct
+module ComposeApplicative : (Applicative with type t = mutation and type 'a u = 'a) = struct
   type t = mutation
   type 'a u = 'a
 
-  let initial = []
-  let finalize a = List.rev a
-  let accumulate a ia = List_iterator.step a ia
+  let fmap f x = f x
+  let apply = fmap
 
   let instruct x y =
     let x' = (Option.value x ~default:Empty) in
@@ -58,23 +49,13 @@ module Compose : (OperationAction with type 'a u = 'a) = struct
     | Retain(_), Delete    -> (Tail, Tail, Append(y'))
     | _, _                 -> raise (Failure "Unreachable")
 end
-module ComposeExecutor = Executor(Compose)
 
-module Transform : (OperationAction with type 'a u = 'a * 'a) = struct
+module TransformApplicative : (Applicative with type t = mutation and type 'a u = 'a * 'a) = struct
   type t = mutation
   type 'a u = 'a * 'a
 
-  let rev_compress l =
-    let rec compress_list lst acc =
-      match lst, acc with
-      | [], _ -> acc
-      | Retain(x) :: x_tl, Retain(y) :: y_tl -> compress_list x_tl (Retain(x + y) :: y_tl)
-      | x :: tl, _ -> compress_list tl (x :: acc)
-    in compress_list l []
-
-  let initial = ([], [])
-  let finalize (a, b) = rev_compress a, rev_compress b
-  let accumulate (a, b) (ia, ib) = (List_iterator.step a ia), (List_iterator.step b ib)
+  let fmap f (t1, t2) = f t1, f t2
+  let apply (f1, f2) (t1, t2) = f1 t1, f2 t2
 
   let instruct x y =
     let x' = (Option.value x ~default:Empty) in
@@ -94,4 +75,26 @@ module Transform : (OperationAction with type 'a u = 'a * 'a) = struct
     | Retain(a), Delete    -> (Swap(Retain(a-1)), Tail, (Identity, Append(y')))
     | _, _                 -> raise (Failure "Unreachable")
 end
-module TransformExecutor = Executor(Transform)
+
+module Compose = struct
+  module ComposeReducer = Reducer(ComposeApplicative)
+
+  let exec x y =
+    List.rev @@ ComposeReducer.reduce x y []
+end
+
+module Transform = struct
+  module TransformReducer = Reducer(TransformApplicative)
+
+  let rev_compress l =
+    let rec compress_list lst acc =
+      match lst, acc with
+      | [], _ -> acc
+      | Retain(x) :: x_tl, Retain(y) :: y_tl -> compress_list x_tl (Retain(x + y) :: y_tl)
+      | x :: tl, _ -> compress_list tl (x :: acc)
+    in compress_list l []
+
+  let exec x y =
+    let (a, b) = TransformReducer.reduce x y ([],[]) in
+    rev_compress a, rev_compress b
+end

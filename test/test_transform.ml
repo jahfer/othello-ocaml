@@ -1,35 +1,34 @@
 open OUnit2
-module O = Operation
 
-let op_tom = [O.Retain(2); O.Insert('a')]
-let op_jerry = [O.Retain(2); O.Insert('t')]
-let op_barry = [O.Retain(1); O.Delete]
+let op_tom = [Operation.Retain(2); Operation.Insert('a')]
+let op_jerry = [Operation.Retain(2); Operation.Insert('t')]
+let op_barry = [Operation.Retain(1); Operation.Delete]
 
 let test_transform_two_operations _ =
-  let lhs, rhs = O.TransformExecutor.reduce op_tom op_jerry in
-  assert_equal [O.Retain(2); O.Insert('a'); O.Retain(1)] lhs;
-  assert_equal [O.Retain(3); O.Insert('t')] rhs
+  let lhs, rhs = Operation.Transform.exec op_tom op_jerry in
+  assert_equal [Operation.Retain(2); Operation.Insert('a'); Operation.Retain(1)] lhs;
+  assert_equal [Operation.Retain(3); Operation.Insert('t')] rhs
 
 let test_delete_insert _ =
-  let lhs, rhs = O.TransformExecutor.reduce op_tom op_barry in
-  assert_equal [O.Retain(1); O.Insert('a')] lhs;
-  assert_equal [O.Retain(1); O.Delete; O.Retain(1)] rhs
+  let lhs, rhs = Operation.Transform.exec op_tom op_barry in
+  assert_equal [Operation.Retain(1); Operation.Insert('a')] lhs;
+  assert_equal [Operation.Retain(1); Operation.Delete; Operation.Retain(1)] rhs
 
 let test_insert_delete _ =
-  let lhs, rhs = O.TransformExecutor.reduce op_barry op_tom in
-  assert_equal [O.Retain(1); O.Delete; O.Retain(1)] lhs;
-  assert_equal [O.Retain(1); O.Insert('a')] rhs
+  let lhs, rhs = Operation.Transform.exec op_barry op_tom in
+  assert_equal [Operation.Retain(1); Operation.Delete; Operation.Retain(1)] lhs;
+  assert_equal [Operation.Retain(1); Operation.Insert('a')] rhs
 
 let test_transforming_two_delete_operations _ =
-  let lhs, rhs = O.TransformExecutor.reduce op_barry op_barry in
-  assert_equal [O.Retain(1)] lhs;
-  assert_equal [O.Retain(1)] rhs
+  let lhs, rhs = Operation.Transform.exec op_barry op_barry in
+  assert_equal [Operation.Retain(1)] lhs;
+  assert_equal [Operation.Retain(1)] rhs
 
 let test_transform_deletes_at_different_points _ =
-  let a, b = [O.Retain(1); O.Delete; O.Retain(2)], [O.Retain(2); O.Delete; O.Retain(1)] in
-  let lhs, rhs = O.TransformExecutor.reduce a b in
-  assert_equal [O.Retain(1); O.Delete; O.Retain(1)] lhs;
-  assert_equal [O.Retain(1); O.Delete; O.Retain(1)] rhs
+  let a, b = [Operation.Retain(1); Operation.Delete; Operation.Retain(2)], [Operation.Retain(2); Operation.Delete; Operation.Retain(1)] in
+  let lhs, rhs = Operation.Transform.exec a b in
+  assert_equal [Operation.Retain(1); Operation.Delete; Operation.Retain(1)] lhs;
+  assert_equal [Operation.Retain(1); Operation.Delete; Operation.Retain(1)] rhs
 
 let suite = "Transform" >:::
   [
