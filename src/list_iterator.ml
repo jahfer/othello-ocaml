@@ -1,6 +1,6 @@
 open Core
 
-type 'a instruction = Identity | Tail | Append of 'a | Swap of 'a
+type 'a command = Identity | Tail | Append of 'a | Swap of 'a
 
 let step l = function
 | Identity -> l

@@ -4,7 +4,7 @@ module type Applicative = sig
   type t
   type _ u
   val instruct : t option -> t option ->
-    (t List_iterator.instruction * t List_iterator.instruction * t List_iterator.instruction u)
+    (t List_iterator.command * t List_iterator.command * t List_iterator.command u)
   val fmap : ('a -> 'b) -> 'a u -> 'b u
   val apply : ('a -> 'b) u -> 'a u -> 'b u
 end
