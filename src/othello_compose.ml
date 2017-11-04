@@ -19,12 +19,12 @@ module ComposeApplicative : (Reducer.Applicative with type t = Mut.t and type 'a
       else if a < b then              (Tail, Swap(Mut.Retain(b-a)), Append(x'))
       else                            (Tail, Tail, Append(x'))
     | Mut.Delete,    _             -> (Tail, Identity, Append(x'))
-    | _,         Mut.Insert(_)     -> (Identity, Tail, Append(y'))
+    | _,             Mut.Insert(_) -> (Identity, Tail, Append(y'))
     | Mut.Insert(_), Mut.Retain(1) -> (Tail, Tail, Append(x'))
     | Mut.Insert(_), Mut.Retain(b) -> (Tail, Swap(Mut.Retain(b-1)), Append(x'))
     | Mut.Insert(_), Mut.Delete    -> (Tail, Tail, Identity)
     | Mut.Retain(_), Mut.Delete    -> (Tail, Tail, Append(y'))
-    | _, _                         -> raise (Failure "Unreachable")
+    | _,             _             -> raise (Failure "Unreachable")
 end
 
 module ComposeReducer = Reducer.Make(ComposeApplicative)
