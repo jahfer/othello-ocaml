@@ -1,30 +1,30 @@
 open Core
 
-module M = Mutation
+module Mut = Mutation
 
-module ComposeApplicative : (Reducer.Applicative with type t = M.t and type 'a u = 'a) = struct
-  type t = M.t
+module ComposeApplicative : (Reducer.Applicative with type t = Mut.t and type 'a u = 'a) = struct
+  type t = Mut.t
   type 'a u = 'a
 
   let fmap f x = f x
   let apply = fmap
 
   let instruct x y =
-    let x' = (Option.value x ~default:M.Empty) in
-    let y' = (Option.value y ~default:M.Empty) in
+    let x' = (Option.value x ~default:Mut.Empty) in
+    let y' = (Option.value y ~default:Mut.Empty) in
     let open List_iterator in
     match x', y' with
-    | M.Retain(a), M.Retain(b) ->
-      if a > b then           (Swap(M.Retain(a-b)), Tail, Append(y'))
-      else if a < b then      (Tail, Swap(M.Retain(b-a)), Append(x'))
-      else                    (Tail, Tail, Append(x'))
-    | M.Delete,    _           -> (Tail, Identity, Append(x'))
-    | _,         M.Insert(_)   -> (Identity, Tail, Append(y'))
-    | M.Insert(_), M.Retain(1) -> (Tail, Tail, Append(x'))
-    | M.Insert(_), M.Retain(b) -> (Tail, Swap(M.Retain(b-1)), Append(x'))
-    | M.Insert(_), M.Delete    -> (Tail, Tail, Identity)
-    | M.Retain(_), M.Delete    -> (Tail, Tail, Append(y'))
-    | _, _                 -> raise (Failure "Unreachable")
+    | Mut.Retain(a), Mut.Retain(b) ->
+      if a > b then                   (Swap(Mut.Retain(a-b)), Tail, Append(y'))
+      else if a < b then              (Tail, Swap(Mut.Retain(b-a)), Append(x'))
+      else                            (Tail, Tail, Append(x'))
+    | Mut.Delete,    _             -> (Tail, Identity, Append(x'))
+    | _,         Mut.Insert(_)     -> (Identity, Tail, Append(y'))
+    | Mut.Insert(_), Mut.Retain(1) -> (Tail, Tail, Append(x'))
+    | Mut.Insert(_), Mut.Retain(b) -> (Tail, Swap(Mut.Retain(b-1)), Append(x'))
+    | Mut.Insert(_), Mut.Delete    -> (Tail, Tail, Identity)
+    | Mut.Retain(_), Mut.Delete    -> (Tail, Tail, Append(y'))
+    | _, _                         -> raise (Failure "Unreachable")
 end
 
 module ComposeReducer = Reducer.Make(ComposeApplicative)
