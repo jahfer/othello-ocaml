@@ -1,16 +1,16 @@
 open Core
 
 module type Applicative = sig
-  type t
+  type _ t
   type _ u
-  val instruct : t option -> t option ->
-    (t List_iterator.command * t List_iterator.command * t List_iterator.command u)
+  val instruct : 'a t option -> 'a t option ->
+    ('a t List_iterator.command * 'a t List_iterator.command * 'a t List_iterator.command u)
   val fmap : ('a -> 'b) -> 'a u -> 'b u
   val apply : ('a -> 'b) u -> 'a u -> 'b u
 end
 
 module Make(M : Applicative) = struct
-  type t = M.t
+  type 'a t = 'a M.t
   type 'a u = 'a M.u
 
   let (<*>) f x = M.apply f x

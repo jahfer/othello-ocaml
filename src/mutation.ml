@@ -1,3 +1,3 @@
 open Core
 
-type t = Retain of int | Insert of char | Delete | Empty
+type 'a t = Retain of int | Insert of 'a | Delete | Empty

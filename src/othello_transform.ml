@@ -2,8 +2,8 @@ open Core
 
 module Mut = Mutation
 
-module TransformApplicative : (Reducer.Applicative with type t = Mut.t and type 'a u = 'a * 'a) = struct
-  type t = Mut.t
+module TransformApplicative : (Reducer.Applicative with type 'a t = 'a Mut.t and type 'a u = 'a * 'a) = struct
+  type 'a t = 'a Mut.t
   type 'a u = 'a * 'a
 
   let fmap f (t1, t2) = f t1, f t2

@@ -2,9 +2,11 @@ open Core
 
 module Mut = Mutation
 
-module ComposeApplicative : (Reducer.Applicative with type t = Mut.t and type 'a u = 'a) = struct
-  type t = Mut.t
-  type 'a u = 'a
+type v = char
+
+module ComposeApplicative : (Reducer.Applicative with type 'a t = 'a Mut.t and type 'b u = 'b) = struct
+  type 'a t = 'a Mut.t
+  type 'b u = 'b
 
   let fmap f x = f x
   let apply = fmap

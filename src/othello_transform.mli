@@ -1,1 +1,1 @@
-val exec : Mutation.t list -> Mutation.t list -> Mutation.t list * Mutation.t list
+val exec : 'a Mutation.t list -> 'a Mutation.t list -> 'a Mutation.t list * 'a Mutation.t list
