@@ -10,22 +10,21 @@ module TransformApplicative : (Reducer.Applicative with type 'a t = 'a Mut.t and
   let apply (f1, f2) (t1, t2) = f1 t1, f2 t2
 
   let instruct x y =
-    let x' = (Option.value x ~default:Mut.Empty) in
-    let y' = (Option.value y ~default:Mut.Empty) in
     let open List_iterator in
-    match x', y' with
-    | Mut.Insert(_), _             -> (Tail, Identity, (Append(x'), Append(Mut.Retain(1))))
-    | _,             Mut.Insert(_) -> (Identity, Tail, (Append(Mut.Retain(1)), Append(y')))
-    | Mut.Retain(a), Mut.Retain(b) ->
-      if a > b then                   (Swap(Mut.Retain(a-b)), Tail, (Append(y'), Append(y')))
-      else if a < b then              (Tail, Swap(Mut.Retain(b-a)), (Append(x'), Append(x')))
-      else                            (Tail, Tail, (Append(x'), Append(x')))
-    | Mut.Delete,    Mut.Delete    -> (Tail, Tail, (Identity, Identity))
-    | Mut.Delete,    Mut.Retain(1) -> (Tail, Tail, (Append(x'), Identity))
-    | Mut.Delete,    Mut.Retain(b) -> (Tail, Swap(Mut.Retain(b-1)), (Append(x'), Identity))
-    | Mut.Retain(1), Mut.Delete    -> (Tail, Tail, (Identity, Append(y')))
-    | Mut.Retain(a), Mut.Delete    -> (Swap(Mut.Retain(a-1)), Tail, (Identity, Append(y')))
-    | _,             _             -> raise (Failure "Unreachable")
+    match x, y with
+    | Some(Mut.Insert(_) as x'), _ -> (Tail, Identity, (Append(x'), Append(Mut.Retain(1))))
+    | _, Some(Mut.Insert(_) as y') -> (Identity, Tail, (Append(Mut.Retain(1)), Append(y')))
+    | Some(x'), Some(y')           -> (match x', y' with
+      | Mut.Retain(a), Mut.Retain(b) when a > b -> (Swap(Mut.Retain(a-b)), Tail, (Append(y'), Append(y')))
+      | Mut.Retain(a), Mut.Retain(b) when a < b -> (Tail, Swap(Mut.Retain(b-a)), (Append(x'), Append(x')))
+      | Mut.Retain(_), Mut.Retain(_) -> (Tail, Tail, (Append(x'), Append(x')))
+      | Mut.Delete,    Mut.Delete    -> (Tail, Tail, (Identity, Identity))
+      | Mut.Delete,    Mut.Retain(1) -> (Tail, Tail, (Append(x'), Identity))
+      | Mut.Delete,    Mut.Retain(b) -> (Tail, Swap(Mut.Retain(b-1)), (Append(x'), Identity))
+      | Mut.Retain(1), Mut.Delete    -> (Tail, Tail, (Identity, Append(y')))
+      | Mut.Retain(a), Mut.Delete    -> (Swap(Mut.Retain(a-1)), Tail, (Identity, Append(y')))
+      | _ -> raise (Failure "Unreachable"))
+    | _ -> raise (Invalid_argument "Bad instruction")
 end
 
 module TransformReducer = Reducer.Make(TransformApplicative)
