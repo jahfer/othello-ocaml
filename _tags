@@ -1,2 +1,2 @@
-true: package(core)
+true: package(core), package(str)
 true: thread,debug,annot

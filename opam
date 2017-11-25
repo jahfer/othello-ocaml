@@ -11,4 +11,5 @@ depends: [
   "core"
   "ocamlfind" {build}
   "ounit"
+  "str"
 ]

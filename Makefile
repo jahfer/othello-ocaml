@@ -7,7 +7,7 @@ run:
 	./main.byte
 
 build-test:
-	corebuild -pkg oUnit -Is src test/test.byte
+	corebuild -pkg oUnit,str -Is src test/test.byte
 test:
 	make build-test && ./test.byte
 

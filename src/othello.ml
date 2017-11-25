@@ -11,3 +11,17 @@ module Transform = Othello_transform
 let (|+|) = Compose.exec
 
 let (|**|) = Transform.exec
+
+(* The meat *)
+
+module StringDocument = Document.Make(struct
+  type t = string
+  let initial = ""
+  let append_to_final x y = x ^ y
+
+  let apply_operation doc = function
+    | Mutation.Insert(x) -> Some(x), doc
+    | Mutation.Delete -> None, Str.string_after doc 1
+    | Mutation.Retain(x) -> Some(Str.string_before doc x), Str.string_after doc x
+    | Mutation.Empty -> raise @@ Invalid_argument "Mutation.Empty not supported"
+end)
