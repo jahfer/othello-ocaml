@@ -11,5 +11,3 @@ module Transform = Othello_transform
 let (|+|) = Compose.exec
 
 let (|**|) = Transform.exec
-
-
