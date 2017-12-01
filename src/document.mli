@@ -9,7 +9,3 @@ end
 module Make(M : Document_intf) : sig
   val apply : 'a M.t -> 'a M.u Mutation.t list -> 'a M.t
 end
-
-module ListDocument : sig
-  val apply : 'a list -> 'a Mutation.t list -> 'a list
-end

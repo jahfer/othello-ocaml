@@ -22,17 +22,3 @@ module Make(M : Document_intf) = struct
         in apply_operations out' tl ops
       in apply_operations M.initial d o
 end
-
-module ListDocument = Make(struct
-  type 'a t = 'a list
-  type 'a u = 'a
-
-  let initial = []
-  let append_to_final doc el = doc @ [el]
-
-  let apply_operation doc = function
-    | Mutation.Insert(x) -> Some(x), doc
-    | Mutation.Delete    -> None, List.tl_exn doc
-    | Mutation.Retain(x) when x = 1 -> Some(List.hd_exn doc), List.tl_exn doc
-    | _ -> raise (Invalid_argument "Bad instruction")
-end)
