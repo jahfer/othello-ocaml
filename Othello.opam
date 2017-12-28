@@ -1,0 +1,19 @@
+opam-version: "1.2"
+name: "Othello"
+version: "0.0.1"
+maintainer: "Jahfer Husain <echo@jahfer.com>"
+authors: ["Jahfer Husain <echo@jahfer.com>"]
+license: "MIT"
+homepage: "https://github.com/jahfer/othello-ocaml"
+bug-reports: "https://github.com/jahfer/othello-ocaml/issues"
+dev-repo: "git://github.com/jahfer/othello-ocaml.git"
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "jbuilder" {build}
+  "core"
+  "ounit"
+  "str"
+]
+available: [ ocaml-version >= "4.02" & ocaml-version < "4.07" ]

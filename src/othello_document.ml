@@ -17,8 +17,8 @@ module Make(M : Document_intf) = struct
       | [] -> out
       | x :: ops -> let (hd, tl) = M.apply_operation built_op x in
         let out' = match hd with
-        | Some(x) -> M.append_to_final out x
-        | None -> out
+          | Some(x) -> M.append_to_final out x
+          | None -> out
         in apply_operations out' tl ops
-      in apply_operations M.initial d o
+    in apply_operations M.initial d o
 end
