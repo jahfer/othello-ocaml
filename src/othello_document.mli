@@ -3,7 +3,7 @@ module type Document_intf = sig
   type 'a u
   val initial : 'a t
   val apply_operation : 'a t -> 'a u Mutation.t -> 'a u option * 'a t
-  val append_to_final : 'a t -> 'a u -> 'a t
+  val concat : 'a t -> 'a u -> 'a t
 end
 
 module Make(M : Document_intf) : sig
